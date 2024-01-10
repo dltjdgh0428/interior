@@ -1,0 +1,48 @@
+.navbar {
+    background-color: transparent; /* 배경을 투명하게 설정합니다. */
+    position: absolute;
+    width: 100%;
+    z-index: 1; /* 네비게이션 바가 이미지 위에 레이어로 표시되도록 설정합니다. */
+}
+.navbar a.navbar-brand,
+.navbar a.nav-link {
+    color: black !important; /* 글자 색상을 흰색으로 설정합니다. */
+    font-weight: bold; /* 글꼴을 Bold로 설정합니다. */
+}
+.carousel {
+    position: relative;
+}
+.carousel-inner {
+    width: 100%;
+    height: 100vh; /* 화면 높이의 100%로 설정합니다. */
+    object-fit: cover; /* 이미지를 화면에 맞게 크롭합니다. */
+}
+/* 추가한 CSS */
+.navbar-nav {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* 가로 중앙 정렬을 설정합니다. */
+}
+.navbar-nav .nav-item {
+    text-align: center; /* 텍스트를 중앙 정렬합니다. */
+    margin: 0 20px; /* 아이템 간격을 설정합니다. */
+    font-size: 20px;
+}
+/* 추가한 CSS */
+.mid-content {
+    text-align: center;
+    border-radius: 10px;
+    padding: 50px 0; /* 위아래 여백을 설정합니다. */
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5); /* 배경 색상에 투명도를 적용합니다. */
+    top: 50%; /* 상단에서 50% 위치에 배치합니다. */
+    left: 50%; /* 왼쪽에서 50% 위치에 배치합니다. */
+    transform: translate(-50%, -50%); /* 중앙 정렬을 설정합니다. */
+}
+.mid-content p {
+    margin-left: 30px;
+    margin-right: 30px;
+    font-size: 24px; /* 텍스트 크기를 설정합니다. */
+    margin-bottom: 20px; /* 문단 간격을 설정합니다. */
+    color: white; /* 흰색 텍스트 색상을 적용합니다. */
+}

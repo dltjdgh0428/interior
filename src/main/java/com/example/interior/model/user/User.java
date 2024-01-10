@@ -1,6 +1,7 @@
 package com.example.interior.model.user;
 
 import com.example.interior.model.image.Image;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,11 +26,6 @@ public class User {
     private String username;
     private String password;
     private String role; // USER, ADMIN
-
-    @OneToMany(mappedBy = "user")
-    private List<Image> images;
-
-
 
     @CreationTimestamp
     private Timestamp createDate;

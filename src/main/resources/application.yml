@@ -7,14 +7,20 @@ server:
       enabled: true
 
 spring:
-  mvc:
-    jpa:
-      open-in-view: true
-      hibernate:
-        ddl-auto: update
-        naming:
-          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-      show-sql: true
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+
+  servlet:
+    multipart:
+      enabled: true
+
+  config:
+    import: application-secret.yml
 
 
 file:

@@ -1,0 +1,16 @@
+.card-container {
+    margin-left: 100px;
+    margin-right: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* 카드 사이에 간격을 만듭니다. */
+}
+
+.card {
+    flex-basis: calc(33.33% - 40px); /* 3개의 카드를 한 줄에 배치합니다. */
+    margin: 20px;
+    max-width: calc(33.33% - 40px); /* 각 카드의 최대 너비를 설정합니다. */
+}
+nav {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4); /* 그림자 스타일 및 색상을 설정합니다. */
+}

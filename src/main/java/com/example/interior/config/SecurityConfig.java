@@ -19,14 +19,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/", "/user/**", "/image/**", "/subscribe/**, /comment/**").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
-                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .anyRequest()
                 .permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/auth/signin")
-                .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/");
+                .loginProcessingUrl("/")
+                .defaultSuccessUrl("/auth/signin");
     }
 }
