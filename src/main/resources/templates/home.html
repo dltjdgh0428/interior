@@ -22,7 +22,8 @@
                 <a class="nav-link nav-item" th:if="${principal != null}">소개말 바꾸기</a>
             </div>
         </div>
-        <a class="navbar-brand" href="/auth/signin">관리자 로그인</a>
+        <a class="navbar-brand" href="/auth/signin" th:if="${principal == null}">관리자 로그인</a>
+        <a class="navbar-brand" href="/logout" th:if="${principal != null}">로그아웃</a>
     </div>
 </nav>
 
