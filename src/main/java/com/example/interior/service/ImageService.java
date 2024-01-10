@@ -46,4 +46,9 @@ public class ImageService {
     public List<Image> 인테리어사진(){
         return imageRepository.mExplore();
     }
+
+    @Transactional
+    public void 이미지삭제(int id) {
+        imageRepository.deleteById(id);
+    }
 }
