@@ -1,1 +1,21 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: utf-8
+      enabled: true
 
+spring:
+  mvc:
+    jpa:
+      open-in-view: true
+      hibernate:
+        ddl-auto: update
+        naming:
+          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      show-sql: true
+
+
+file:
+  path: C:/workspace/interior/upload/
