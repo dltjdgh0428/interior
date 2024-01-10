@@ -16,15 +16,6 @@ public class HomeController {
     public String mainPage() {
         return "home";
     }
-    @GetMapping("about")
-    public String aboutPage() {
-        return "about";
-    }
-
-    @GetMapping("estimate")
-    public String estimatePage() {
-        return "estimate";
-    }
 
     @GetMapping("portfolio")
     public String portfolioPage() {
