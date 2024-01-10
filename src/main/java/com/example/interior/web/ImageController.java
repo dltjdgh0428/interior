@@ -1,5 +1,6 @@
 package com.example.interior.web;
 
+import com.example.interior.config.auth.PrincipalDetails;
 import com.example.interior.handler.ex.CustomValidationException;
 import com.example.interior.service.ImageService;
 import com.example.interior.web.dto.image.ImageUploadDto;
@@ -21,7 +22,7 @@ public class ImageController {
         return "image/upload";
     }
 
-    @PostMapping("/image")
+    @PostMapping("/portfolio")
     public String imageUpload(ImageUploadDto imageUploadDto) {
         //서비스 호출
         if(imageUploadDto.getFile().isEmpty()) {
@@ -29,13 +30,14 @@ public class ImageController {
         }
 
         imageService.사진업로드(imageUploadDto);
-        return "redirect:/user/"; // 여기 인테리어 페이지로 이동하게 할 것
+        return "redirect:/portfolio"; // 여기 인테리어 페이지로 이동하게 할 것
     }
 
-    @GetMapping("/image")
-    public String explore(Model model) {
+    @GetMapping("/portfolio")
+    public String explore(Model model,@AuthenticationPrincipal PrincipalDetails principalDetails) {
         model.addAttribute("images", imageService.인테리어사진());
-        return "image";
+        model.addAttribute("principal", principalDetails);
+        return "image/portfolio";
     }
 
 }

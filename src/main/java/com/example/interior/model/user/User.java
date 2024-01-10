@@ -25,7 +25,7 @@ public class User {
     @Column(length = 30, unique = true)
     private String username;
     private String password;
-    private String role; // USER, ADMIN
+    private String role;
 
     @CreationTimestamp
     private Timestamp createDate;
