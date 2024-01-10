@@ -61,3 +61,13 @@ nav {
     text-align: justify; /* 설명 텍스트 정렬 */
     padding: 0 20px; /* 좌우 패딩 추가 */
 }
+.modal-dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 1rem);
+}
+
+.modal {
+    overflow-y: auto;
+}
