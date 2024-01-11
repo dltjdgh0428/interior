@@ -20,14 +20,15 @@ public class ImageApiController {
 
     private final ImageService imageService;
 
-    @GetMapping("/api/interior")
-    public ResponseEntity<?> imageStory() {
-        List<Image> images = imageService.인테리어사진();
-        return new ResponseEntity<>(new CMRespDto<>(1, "성공", images), HttpStatus.OK);
-    }
     @DeleteMapping("/api/portfolio/{id}")
     public ResponseEntity<?> deleteById(@PathVariable int id){
         imageService.이미지삭제(id);
         return new ResponseEntity<>(new CMRespDto<>(1, "이미지삭제성공", null), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/api/cover/{id}")
+    public ResponseEntity<?> deleteCoverById(@PathVariable int id){
+        imageService.커버이미지삭제(id);
+        return new ResponseEntity<>(new CMRespDto<>(1, "커버이미지삭제성공", null), HttpStatus.OK);
     }
 }

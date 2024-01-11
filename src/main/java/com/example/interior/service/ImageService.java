@@ -1,7 +1,10 @@
 package com.example.interior.service;
 
+import com.example.interior.model.cover.Cover;
+import com.example.interior.model.cover.CoverRepository;
 import com.example.interior.model.image.Image;
 import com.example.interior.model.image.ImageRepository;
+import com.example.interior.web.dto.cover.CoverUploadDto;
 import com.example.interior.web.dto.image.ImageUploadDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,6 +22,7 @@ import java.util.UUID;
 public class ImageService {
 
     private final ImageRepository imageRepository;
+    private final CoverRepository coverRepository;
 
     @Value("${file.path}")
     private String uploadFolder;
@@ -42,13 +46,40 @@ public class ImageService {
 
     }
 
+    @Transactional
+    public void 커버사진업로드(CoverUploadDto coverUploadDto) {
+        UUID uuid = UUID.randomUUID();
+        String imageFileName = uuid + "_" + coverUploadDto.getFile().getOriginalFilename();
+        System.out.println("커버 이미지 파일이름:"+imageFileName);
+
+        Path imageFilePath = Paths.get(uploadFolder + imageFileName);
+
+        try {
+            Files.write(imageFilePath, coverUploadDto.getFile().getBytes());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Cover cover = coverUploadDto.toEntity(imageFileName);
+        coverRepository.save(cover);
+    }
+
     @Transactional(readOnly = true)
     public List<Image> 인테리어사진(){
         return imageRepository.mExplore();
     }
 
+    @Transactional(readOnly = true)
+    public List<Cover> 커버사진(){
+        return coverRepository.mExplore();
+    }
+
     @Transactional
     public void 이미지삭제(int id) {
         imageRepository.deleteById(id);
+    }
+    @Transactional
+    public void 커버이미지삭제(int id) {
+        coverRepository.deleteById(id);
     }
 }

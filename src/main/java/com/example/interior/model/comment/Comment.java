@@ -1,18 +1,16 @@
-package com.example.interior.model.image;
+package com.example.interior.model.comment;
 
-import com.example.interior.model.album.Album;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.sql.Timestamp;
 
 @Builder
@@ -20,16 +18,13 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Data
 @Entity
-public class Image {
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String caption;
-    private String postImageUrl;
 
-    @ManyToOne
-    @JoinColumn(name = "album_id")
-    private Album album;
+    @Column(length = 100, nullable = false)
+    private String content;
 
     @CreationTimestamp
     private Timestamp createDate;

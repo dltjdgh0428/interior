@@ -1,5 +1,5 @@
-function deletePortfolioImage(imageId) {
-    fetch('/api/portfolio/' + imageId, {
+function deleteCoverImage(coverId) {
+    fetch('/api/cover/' + coverId, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',

@@ -1,6 +1,8 @@
-package com.example.interior.model.image;
+package com.example.interior.model.cover;
 
-import com.example.interior.model.album.Album;
+import com.example.interior.model.comment.Comment;
+import com.example.interior.model.image.Image;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,8 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.sql.Timestamp;
 
 @Builder
@@ -20,16 +20,13 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Data
 @Entity
-public class Image {
+public class Cover {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String caption;
-    private String postImageUrl;
 
-    @ManyToOne
-    @JoinColumn(name = "album_id")
-    private Album album;
+    private String title;
+    private String coverImageUrl;
 
     @CreationTimestamp
     private Timestamp createDate;

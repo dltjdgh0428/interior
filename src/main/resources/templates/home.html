@@ -18,7 +18,9 @@
             <div class="navbar-nav">
                 <a class="nav-link nav-item" href="/about">회사소개</a>
                 <a class="nav-link nav-item" href="/portfolio">시공사례</a>
-                <a class="nav-link nav-item" th:if="${principal != null}">메인 이미지 추가하기</a>
+                <!-- 메인 이미지 추가/삭제 링크 -->
+                <a class="nav-link nav-item" href="#" th:if="${principal != null}" data-bs-toggle="modal"
+                   data-bs-target="#manageMainImageModal">메인 이미지 관리</a>
                 <a class="nav-link nav-item" th:if="${principal != null}">소개말 바꾸기</a>
             </div>
         </div>
@@ -27,16 +29,10 @@
     </div>
 </nav>
 
-<div id="carouselExample" class="carousel slide">
+<div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="/asset/i1.jpg" class="d-block w-100" alt="..."> <!-- 이미지 경로 변경 -->
-        </div>
-        <div class="carousel-item">
-            <img src="/asset/i2.jpg" class="d-block w-100" alt="..."> <!-- 이미지 경로 변경 -->
-        </div>
-        <div class="carousel-item">
-            <img src="/asset/i3.jpg" class="d-block w-100" alt="..."> <!-- 이미지 경로 변경 -->
+        <div th:each="cover, iterStat : ${covers}" th:class="${iterStat.first} ? 'carousel-item active' : 'carousel-item'">
+            <img th:src="@{/upload/{filename}(filename=${cover.coverImageUrl})}" class="d-block w-100" th:alt="커버사진">
         </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -47,6 +43,53 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
+</div>
+
+
+<!-- 메인 이미지 추가/삭제 모달 -->
+<div class="modal fade" id="manageMainImageModal" tabindex="-1" aria-labelledby="manageMainImageModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="manageMainImageModalLabel">메인 이미지 관리</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadModal">이미지
+                    추가
+                </button>
+                <button type="button" class="btn btn-danger">메인 이미지 삭제</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 메인 이미지 추가 모달 -->
+<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="uploadModalLabel">이미지 업로드</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Image 업로드 form -->
+                <form action="/" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="imageTitle" class="form-label">이미지 제목</label>
+                        <<input type="text" class="form-control" id="imageTitle" name="title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="imageFile" class="form-label">이미지 파일</label>
+                        <input type="file" class="form-control" id="imageFile" name="file" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">업로드</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- 중간 멘트 부분 -->

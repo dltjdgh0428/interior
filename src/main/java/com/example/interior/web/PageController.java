@@ -9,12 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class PageController {
 
-    @GetMapping({"/"})
-    public String homePage(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-        model.addAttribute("principal", principalDetails);
-        return "home";
-    }
-
     @GetMapping("/about")
     public String aboutPage(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
         model.addAttribute("principal", principalDetails);

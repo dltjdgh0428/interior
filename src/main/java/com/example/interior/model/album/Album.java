@@ -1,6 +1,6 @@
-package com.example.interior.model.image;
+package com.example.interior.model.album;
 
-import com.example.interior.model.album.Album;
+import com.example.interior.model.image.Image;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,25 +11,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
-public class Image {
+public class Album {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String caption;
-    private String postImageUrl;
 
-    @ManyToOne
-    @JoinColumn(name = "album_id")
-    private Album album;
+    @OneToMany(mappedBy = "album")
+    private List<Image> images;
 
     @CreationTimestamp
     private Timestamp createDate;
