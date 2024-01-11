@@ -2,6 +2,7 @@ package com.example.interior.web;
 
 import com.example.interior.config.auth.PrincipalDetails;
 import com.example.interior.handler.ex.CustomValidationException;
+import com.example.interior.service.CommentService;
 import com.example.interior.service.ImageService;
 import com.example.interior.web.dto.cover.CoverUploadDto;
 import com.example.interior.web.dto.image.ImageUploadDto;
@@ -17,11 +18,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ImageController {
 
     private final ImageService imageService;
+    private final CommentService commentService;
     //커버사진
     @GetMapping({"/"})
     public String homePage(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
         model.addAttribute("covers", imageService.커버사진());
         model.addAttribute("principal", principalDetails);
+        model.addAttribute("comments",commentService.인사말());
         return "home";
     }
 
