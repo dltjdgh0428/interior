@@ -30,65 +30,44 @@
     </div>
 </nav>
 
-<!-- 각 이미지에 대응하는 모달 구조 -->
+<!-- 각 이미지에 대응하는 카드 구조 -->
 <div class="card-container" id="imageContainer">
-    <div th:each="image, iterStat : ${images}" class="card">
-        <!-- 이미지를 클릭했을 때 모달 트리거 설정 -->
-        <img th:src="@{/upload/{filename}(filename=${image.postImageUrl})}" alt="Image" class="card-img-top"
-             data-bs-toggle="modal" th:attr="data-bs-target=${'#imageModal-' + iterStat.index}"/>
+    <div th:each="album, iterStat : ${albums}" class="card">
+        <!-- 앨범의 첫 번째 이미지를 클릭하면 오버레이 페이지를 여는 함수를 호출합니다. -->
+        <img th:if="${album.images.size() > 0}"
+             th:src="@{/upload/{filename}(filename=${album.images.get(0).postImageUrl})}"
+             alt="Album Image" class="card-img-top"
+             th:data-album-id="${album.id}"
+             onclick="openOverlay(this.dataset.albumId)"/>
         <div class="card-body">
-            <p class="card-text"
-               th:text="${#strings.length(image.caption) > 20} ? ${#strings.substring(image.caption, 0, 20)} + '...자세히보기' : ${image.caption}"></p>
+            <p class="card-text" th:text="${album.caption}"></p>
         </div>
-        <!-- 이미지 클릭 시 상세 내용을 보여줄 모달 -->
-        <div class="modal fade" th:id="${'imageModal-' + iterStat.index}" tabindex="-1"
-             aria-labelledby="imageModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl"> <!-- 모달 크기를 크게 조정 -->
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="row"> <!-- 그리드 시스템 사용 -->
-                            <div class="col-md-6">
-                                <img th:src="@{/upload/{filename}(filename=${image.postImageUrl})}" alt=""
-                                     class="img-fluid"/>
-                            </div>
-                            <div class="col-md-6">
-                                <p th:text="${image.caption}"></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" th:if="${principal != null}"
-                                th:attr="data-image-id=${image.id}"
-                                onclick="deletePortfolioImage(this.dataset.imageId)">앨범 영구 삭제하기
-                        </button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 </div>
 
-
 <!-- Image 업로드 Modal -->
-<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="uploadModalLabel">이미지 업로드</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <!-- Image 업로드 form 중요!! -->
                 <form action="/portfolio" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="imageFile" class="form-label">이미지 파일</label>
-                        <input type="file" class="form-control" id="imageFile" name="file" required>
+                        <input type="file" class="form-control" id="imageFile" name="files"
+                               multiple="multiple"
+                               required>
                     </div>
                     <div class="mb-3">
                         <label for="imageTitle" class="form-label">시공 내용</label>
-                        <textarea class="form-control autoresize" id="imageTitle" name="caption" rows="10"
+                        <textarea class="form-control autoresize" id="imageTitle" name="caption"
+                                  rows="10"
                                   required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">업로드</button>
@@ -97,6 +76,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>

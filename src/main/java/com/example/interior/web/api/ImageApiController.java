@@ -1,6 +1,8 @@
 package com.example.interior.web.api;
 
+import com.example.interior.model.album.Album;
 import com.example.interior.model.image.Image;
+import com.example.interior.service.AlbumService;
 import com.example.interior.service.ImageService;
 import com.example.interior.web.dto.CMRespDto;
 import org.springframework.http.HttpStatus;
@@ -31,4 +33,6 @@ public class ImageApiController {
         imageService.커버이미지삭제(id);
         return new ResponseEntity<>(new CMRespDto<>(1, "커버이미지삭제성공", null), HttpStatus.OK);
     }
+
+
 }

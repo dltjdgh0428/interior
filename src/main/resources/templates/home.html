@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <title>home</title>
     <link href="/css/home.css" rel="stylesheet"> <!-- CSS 경로 변경 -->
+    <script src="/js/main.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
             crossorigin="anonymous"></script>
-    <script src="/js/main.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg">
@@ -31,7 +31,7 @@
     </div>
 </nav>
 
-<!-- 그 커버 이미지 모달 -->
+<!-- 그 커버 이미지 케러셀 아니고 -->
 <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div th:each="cover, iterStat : ${covers}"

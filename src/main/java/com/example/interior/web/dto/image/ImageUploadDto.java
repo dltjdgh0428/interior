@@ -1,20 +1,19 @@
 package com.example.interior.web.dto.image;
 
+import com.example.interior.model.album.Album;
 import com.example.interior.model.image.Image;
 import org.springframework.web.multipart.MultipartFile;
-
 
 import lombok.Data;
 
 @Data
 public class ImageUploadDto {
     private MultipartFile file;
-    private String caption;
 
-    public Image toEntity(String postImageUrl) {
+    public Image toEntity(String postImageUrl, Album album) {
         return Image.builder()
-                .caption(caption)
                 .postImageUrl(postImageUrl)
+                .album(album)
                 .build();
     }
 }

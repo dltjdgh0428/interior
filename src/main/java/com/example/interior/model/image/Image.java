@@ -1,6 +1,7 @@
 package com.example.interior.model.image;
 
 import com.example.interior.model.album.Album;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,9 +25,9 @@ public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String caption;
     private String postImageUrl;
 
+    @JsonIgnoreProperties({"images"})
     @ManyToOne
     @JoinColumn(name = "album_id")
     private Album album;

@@ -1,9 +1,12 @@
 package com.example.interior.service;
 
+import com.example.interior.model.album.Album;
+import com.example.interior.model.album.AlbumRepository;
 import com.example.interior.model.cover.Cover;
 import com.example.interior.model.cover.CoverRepository;
 import com.example.interior.model.image.Image;
 import com.example.interior.model.image.ImageRepository;
+import com.example.interior.web.dto.album.AlbumUploadDto;
 import com.example.interior.web.dto.cover.CoverUploadDto;
 import com.example.interior.web.dto.image.ImageUploadDto;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +31,7 @@ public class ImageService {
     private String uploadFolder;
 
     @Transactional
-    public void 사진업로드(ImageUploadDto imageUploadDto) {
+    public String 사진업로드(ImageUploadDto imageUploadDto, Album album) {
         UUID uuid = UUID.randomUUID();
         String imageFileName = uuid + "_" + imageUploadDto.getFile().getOriginalFilename();
         System.out.println("이미지 파일이름:"+imageFileName);
@@ -41,9 +44,9 @@ public class ImageService {
             e.printStackTrace();
         }
 
-        Image image = imageUploadDto.toEntity(imageFileName);
+        Image image = imageUploadDto.toEntity(imageFileName,album);
         imageRepository.save(image);
-
+        return imageFileName;
     }
 
     @Transactional
@@ -82,4 +85,6 @@ public class ImageService {
     public void 커버이미지삭제(int id) {
         coverRepository.deleteById(id);
     }
+
+
 }

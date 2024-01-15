@@ -28,6 +28,8 @@ public class Album {
     @OneToMany(mappedBy = "album")
     private List<Image> images;
 
+    private String caption;
+
     @CreationTimestamp
     private Timestamp createDate;
 }

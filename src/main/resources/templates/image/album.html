@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Album</title>
+    <link href="/css/album.css" rel="stylesheet"> <!-- CSS 경로 추가 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+            crossorigin="anonymous"></script>
+    <script src="/js/album.js"></script>
+</head>
+<body>
+<div id="overlay" class="overlay">
+    <div class="overlay-content">
+        <div class="container">
+            <div id="albumCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div th:each="image, iterStat : ${album.images}"
+                         th:class="${iterStat.first} ? 'carousel-item active' : 'carousel-item'">
+                        <img th:src="@{/upload/{filename}(filename=${image.postImageUrl})}" class="d-block w-100"
+                             th:alt="커버사진">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#albumCarousel"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#albumCarousel"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        <button class="btn-close" onclick="window.history.back();">닫기</button>
+    </div>
+</div>
+</body>
+</html>
