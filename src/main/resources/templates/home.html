@@ -30,13 +30,13 @@
         <a class="navbar-brand" href="/logout" th:if="${principal != null}">로그아웃</a>
     </div>
 </nav>
-
 <!-- 그 커버 이미지 케러셀 아니고 -->
 <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div th:each="cover, iterStat : ${covers}"
              th:class="${iterStat.first} ? 'carousel-item active' : 'carousel-item'">
-            <img th:src="@{/upload/{filename}(filename=${cover.coverImageUrl})}" class="d-block w-100" th:alt="커버사진">
+            <img th:src="@{/upload/{filename}(filename=${cover.coverImageUrl})}" class="d-block w-100"
+                 th:alt="커버사진">
         </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -48,7 +48,6 @@
         <span class="visually-hidden">Next</span>
     </button>
 </div>
-
 
 <!-- 메인 이미지 추가/삭제 모달 -->
 <div class="modal fade" id="manageMainImageModal" tabindex="-1" aria-labelledby="manageMainImageModalLabel"
@@ -135,8 +134,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body d-flex justify-content-between">
-                <button type="button" class="btn btn-primary flex-fill me-2" data-bs-toggle="modal" data-bs-target="#addCommentModal">인사말 추가</button>
-                <button type="button" class="btn btn-danger flex-fill ms-2" data-bs-toggle="modal" data-bs-target="#deleteCommentModal">인사말 삭제</button>
+                <button type="button" class="btn btn-primary flex-fill me-2" data-bs-toggle="modal"
+                        data-bs-target="#addCommentModal">인사말 추가
+                </button>
+                <button type="button" class="btn btn-danger flex-fill ms-2" data-bs-toggle="modal"
+                        data-bs-target="#deleteCommentModal">인사말 삭제
+                </button>
             </div>
         </div>
     </div>
@@ -165,7 +168,8 @@
 </div>
 
 <!-- 인사말 삭제 모달 -->
-<div class="modal fade" id="deleteCommentModal" tabindex="-1" aria-labelledby="deleteCommentModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteCommentModal" tabindex="-1" aria-labelledby="deleteCommentModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -175,10 +179,12 @@
             <div class="modal-body">
                 <ul class="list-group">
                     <!-- 타임리프 반복문을 사용하여 인사말 리스트를 렌더링합니다. -->
-                    <li th:each="comment : ${comments}" class="list-group-item d-flex justify-content-between align-items-center">
+                    <li th:each="comment : ${comments}"
+                        class="list-group-item d-flex justify-content-between align-items-center">
                         <span th:text="${comment.content}"></span>
                         <!-- 삭제 버튼 -->
-                        <button type="button" class="btn btn-outline-danger btn-sm" th:data-comment-id="${comment.id}" onclick="deleteComment(this.getAttribute('data-comment-id'))">
+                        <button type="button" class="btn btn-outline-danger btn-sm" th:data-comment-id="${comment.id}"
+                                onclick="deleteComment(this.getAttribute('data-comment-id'))">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </li>
@@ -187,9 +193,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 
 <!-- 중간 멘트 부분 -->

@@ -14,28 +14,40 @@
 <body>
 <div id="overlay" class="overlay">
     <div class="overlay-content">
-        <div class="container">
-            <div id="albumCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div th:each="image, iterStat : ${album.images}"
-                         th:class="${iterStat.first} ? 'carousel-item active' : 'carousel-item'">
-                        <img th:src="@{/upload/{filename}(filename=${image.postImageUrl})}" class="d-block w-100"
-                             th:alt="커버사진">
+        <div class="content-wrapper">
+            <div class="image-container">
+                <div id="albumCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div th:each="image, iterStat : ${album.images}"
+                             th:class="${iterStat.first} ? 'carousel-item active' : 'carousel-item'">
+                            <img th:src="@{/upload/{filename}(filename=${image.postImageUrl})}" class="d-block w-100"
+                                 th:alt="커버사진">
+                        </div>
                     </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#albumCarousel"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#albumCarousel"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#albumCarousel"
-                        data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#albumCarousel"
-                        data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+            </div>
+            <div class="container-divider"></div> <!-- 구분선 -->
+            <div class="caption-container">
+                <p class="container-text" th:text="${album.caption}"></p>
             </div>
         </div>
-        <button class="btn-close" onclick="window.history.back();">닫기</button>
+        <div class="divider"></div> <!-- 구분선-->
+        <div class="buttons-container">
+            <button class="btn btn-danger" id="deleteAlbumButton">앨범 삭제</button>
+            <button class="btn btn-primary" id="editCaptionButton">캡션 수정</button>
+            <button class="btn-close" onclick="window.history.back();"></button>
+        </div>
+
     </div>
 </div>
 </body>

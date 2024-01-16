@@ -1,0 +1,127 @@
+.overlay {
+    position: fixed; /* 전체 화면을 커버하는 위치 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5); /* 반투명 배경 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.overlay-content {
+    background-color: #fff; /* 배경색 설정 */
+    padding: 20px; /* 내부 여백 추가 */
+    display: flex;
+   /* flex-direction: row;
+    align-items: center; */
+    flex-direction: column; /* 세로 방향으로 요소 배치 */
+    align-items: stretch;
+    justify-content: center;
+    width: 70%; /* 고정 가로 크기 */
+    height: 80%; /* 고정 세로 크기 */
+    overflow: auto; /* 내용이 넘칠 경우 스크롤바 표시 */
+    border-radius: 15px; /* 테두리 둥글게 설정 */
+    border: none; /* 테두리 제거 */
+
+    position: relative; /* 자식 요소에 대한 상대적 위치 지정 */
+}
+.content-divider {
+    width: 100%; /* 전체 너비 */
+    border-top: 1px solid #fff; /* 상단 구분선 */
+    background-color: rgba(0,0,0,0.1); /* 반투명 배경 */
+    position: absolute;
+    bottom: 45px; /* 버튼 바로 위에 위치 */
+}
+.image-container {
+    flex: 2;
+    padding-right: 10px;
+}
+
+.caption-container {
+    flex: 1;
+    border-left: 1px solid #ccc; /* 왼쪽에 2픽셀 두께의 회색 선 추가 */
+    padding-left: 10px; /* 왼쪽 여백 추가 */
+    /* 기존 스타일 유지 */
+}
+
+
+.divider {
+    margin-top: auto;
+    height: 1px; /* 선의 높이 */
+    background-color: #ccc; /* 선의 색상 */
+    width: 100%; /* 전체 너비 */
+    margin: 10px 0; /* 위아래 여백 */
+    flex-shrink: 0;
+}
+
+.carousel-inner {
+    position: relative;
+}
+
+.container-text {
+    /* 텍스트 스타일링 */
+    padding: 20px;
+}
+
+.carousel-item img {
+    height: 100%;
+}
+
+.carousel-item img {
+    height: 100%;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: flex-end; /* 오른쪽 끝으로 정렬 */
+    padding: 10px 0;
+    gap: 10px;
+     flex-shrink: 0;
+        margin-top: auto;
+}
+
+/* 필요에 따라 버튼 스타일링 */
+button{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+.btn-close {
+    font-size: 22px;
+  }
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.5);/* 호버 시 배경색 변경 */
+}
+
+
+
+.image-container {
+    flex: none; /* 기존의 flex 설정을 무시 */
+    width: 60%; /* 고정 너비 */
+    height: 100%; /* 전체 높이 */
+    overflow: hidden; /* 이미지가 컨테이너를 넘어갈 경우 숨김 */
+}
+.carousel-item img {
+    width: 100%; /* 너비를 컨테이너에 맞춤 */
+    height: 100%; /* 높이를 컨테이너에 맞춤 */
+    object-fit: cover; /* 이미지가 컨테이너를 채우면서 비율 유지 */
+}
+
+.content-wrapper {
+    flex-grow: 1; /* 가능한 모든 공간을 차지하도록 설정 */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
