@@ -34,7 +34,7 @@
     bottom: 45px; /* 버튼 바로 위에 위치 */
 }
 .image-container {
-    flex: 2;
+    flex: 3;
     padding-right: 10px;
 }
 
@@ -84,8 +84,8 @@
     justify-content: flex-end; /* 오른쪽 끝으로 정렬 */
     padding: 10px 0;
     gap: 10px;
-     flex-shrink: 0;
-        margin-top: auto;
+    flex-shrink: 0;
+    margin-top: auto;
 }
 
 /* 필요에 따라 버튼 스타일링 */
@@ -109,7 +109,7 @@ button:hover {
 
 .image-container {
     flex: none; /* 기존의 flex 설정을 무시 */
-    width: 60%; /* 고정 너비 */
+    width: 70%; /* 고정 너비 */
     height: 100%; /* 전체 높이 */
     overflow: hidden; /* 이미지가 컨테이너를 넘어갈 경우 숨김 */
 }
@@ -124,4 +124,12 @@ button:hover {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.caption-container .container-text {
+    font-size: 24px; /* 원하는 크기로 설정 */
+    /* 추가적인 스타일링 */
+    color: #333; /* 텍스트 색상을 어둡게 설정합니다 */
+    padding: 10px; /* 텍스트 주변에 패딩을 추가합니다 */
+    /* 여기에 다른 스타일 속성들을 추가할 수 있습니다 */
 }

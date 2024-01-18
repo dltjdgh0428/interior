@@ -43,12 +43,41 @@
         </div>
         <div class="divider"></div> <!-- 구분선-->
         <div class="buttons-container">
-            <button class="btn btn-danger" id="deleteAlbumButton">앨범 삭제</button>
-            <button class="btn btn-primary" id="editCaptionButton">캡션 수정</button>
+            <!-- 삭제버튼 -->
+            <button class="btn btn-danger" id="deleteAlbumButton"
+                    th:onclick="'deletePortfolioAlbum(' + ${album.id} + ');'"
+                    th:if="${principal != null}">앨범 삭제
+            </button>
+            <!-- 수정버튼 -->
+            <button class="btn btn-primary" id="editCaptionButton" th:if="${principal != null}" data-bs-toggle="modal"
+                    data-bs-target="#editCaptionModal">설명 수정
+            </button>
+            <!-- 닫기버튼 -->
             <button class="btn-close" onclick="window.history.back();"></button>
         </div>
 
     </div>
 </div>
+
+<div class="modal fade" id="editCaptionModal" tabindex="-1" aria-labelledby="editCaptionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editCaptionModalLabel">설명 수정</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <textarea id="newCaption" class="form-control" rows="3" th:text="${album.caption}"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                <button type="button" class="btn btn-primary" th:onclick="'editCaption(' + ${album.id} + ');'">수정하기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 </body>
 </html>

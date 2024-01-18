@@ -14,10 +14,9 @@
 <body>
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">Home</a>
+        <a class="navbar-brand" href="/">Design Allim</a>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link nav-item" href="/about">회사소개</a>
                 <a class="nav-link nav-item" href="/portfolio">시공사례</a>
                 <!-- 메인 이미지 추가/삭제 링크 -->
                 <a class="nav-link nav-item" href="#" th:if="${principal != null}" data-bs-toggle="modal"
@@ -30,6 +29,7 @@
         <a class="navbar-brand" href="/logout" th:if="${principal != null}">로그아웃</a>
     </div>
 </nav>
+
 <!-- 그 커버 이미지 케러셀 아니고 -->
 <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
@@ -48,7 +48,6 @@
         <span class="visually-hidden">Next</span>
     </button>
 </div>
-
 <!-- 메인 이미지 추가/삭제 모달 -->
 <div class="modal fade" id="manageMainImageModal" tabindex="-1" aria-labelledby="manageMainImageModalLabel"
      aria-hidden="true">
