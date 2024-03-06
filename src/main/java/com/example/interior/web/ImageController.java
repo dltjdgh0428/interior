@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,13 +51,18 @@ public class ImageController {
         return "image/album";
     }
     @PostMapping("/")
-    public String coverImageUpload(CoverUploadDto coverUploadDto) {
+    public String coverImageUpload(CoverUploadDto coverUploadDto) throws IOException {
         //서비스 호출
         if(coverUploadDto.getFile().isEmpty()) {
             throw new CustomValidationException("이미지가 첨부되지 않았습니다.", null);
         }
 
-        imageService.커버사진업로드(coverUploadDto);
+        String amazonBucket = imageService.커버사진업로드(coverUploadDto);
+        System.out.println("-------------------------------------------");
+        System.out.println(amazonBucket);
+        String ads = "https://d2xhxoq0r145gu.cloudfront.net/"+amazonBucket.split("/")[amazonBucket.split("/").length-1];
+        System.out.println("--------------------아래 Cloud Front-----------------------");
+        System.out.println(ads);
         return "redirect:/"; // 여기 인테리어 페이지로 이동하게 할 것
     }
     //포트폴리오 사진

@@ -1,5 +1,7 @@
 package com.example.interior.service;
 
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.example.interior.model.album.Album;
 import com.example.interior.model.album.AlbumRepository;
 import com.example.interior.model.cover.Cover;
@@ -13,7 +15,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -27,6 +31,9 @@ public class ImageService {
     private final ImageRepository imageRepository;
     private final CoverRepository coverRepository;
 
+    private final AmazonS3 amazonS3;
+    @Value("${cloud.aws.s3.bucket}")
+    private String bucket;
     @Value("${file.path}")
     private String uploadFolder;
 
@@ -48,9 +55,9 @@ public class ImageService {
         imageRepository.save(image);
         return imageFileName;
     }
-
+    ///S3버킷 테스트용
     @Transactional
-    public void 커버사진업로드(CoverUploadDto coverUploadDto) {
+    public String 커버사진업로드(CoverUploadDto coverUploadDto) throws IOException {
         UUID uuid = UUID.randomUUID();
         String imageFileName = uuid + "_" + coverUploadDto.getFile().getOriginalFilename();
         System.out.println("커버 이미지 파일이름:"+imageFileName);
@@ -63,8 +70,17 @@ public class ImageService {
             e.printStackTrace();
         }
 
+        MultipartFile multipartFile = coverUploadDto.getFile();
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.setContentLength(multipartFile.getSize());
+        metadata.setContentType(multipartFile.getContentType());
+
+
         Cover cover = coverUploadDto.toEntity(imageFileName);
         coverRepository.save(cover);
+
+        amazonS3.putObject(bucket, imageFileName, multipartFile.getInputStream(), metadata);
+        return amazonS3.getUrl(bucket, imageFileName).toString();
     }
 
     @Transactional(readOnly = true)
