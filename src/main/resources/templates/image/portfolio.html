@@ -34,7 +34,7 @@
     <div th:each="album, iterStat : ${albums}" class="card">
         <!-- 앨범의 첫 번째 이미지를 클릭하면 오버레이 페이지를 여는 함수를 호출합니다. -->
         <img th:if="${album.images.size() > 0}"
-             th:src="@{/upload/{filename}(filename=${album.images.get(0).postImageUrl})}"
+             th:src="${album.images.get(0).postImageUrl}"
              alt="Album Image" class="card-img-top"
              th:data-album-id="${album.id}"
              onclick="openOverlay(this.dataset.albumId)"/>

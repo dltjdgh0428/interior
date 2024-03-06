@@ -20,7 +20,7 @@
                     <div class="carousel-inner">
                         <div th:each="image, iterStat : ${album.images}"
                              th:class="${iterStat.first} ? 'carousel-item active' : 'carousel-item'">
-                            <img th:src="@{/upload/{filename}(filename=${image.postImageUrl})}" class="d-block w-100"
+                            <img th:src="${image.postImageUrl}" class="d-block w-100"
                                  th:alt="커버사진">
                         </div>
                     </div>
@@ -71,12 +71,12 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                <button type="button" class="btn btn-primary" th:onclick="'editCaption(' + ${album.id} + ');'">수정하기</button>
+                <button type="button" class="btn btn-primary" th:onclick="'editCaption(' + ${album.id} + ');'">수정하기
+                </button>
             </div>
         </div>
     </div>
 </div>
-
 
 
 </body>

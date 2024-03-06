@@ -35,7 +35,7 @@
     <div class="carousel-inner">
         <div th:each="cover, iterStat : ${covers}"
              th:class="${iterStat.first} ? 'carousel-item active' : 'carousel-item'">
-            <img th:src="@{/upload/{filename}(filename=${cover.coverImageUrl})}" class="d-block w-100"
+            <img th:src="${cover.coverImageUrl}" class="d-block w-100"
                  th:alt="커버사진">
         </div>
     </div>

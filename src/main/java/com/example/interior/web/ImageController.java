@@ -57,12 +57,8 @@ public class ImageController {
             throw new CustomValidationException("이미지가 첨부되지 않았습니다.", null);
         }
 
-        String amazonBucket = imageService.커버사진업로드(coverUploadDto);
-        System.out.println("-------------------------------------------");
-        System.out.println(amazonBucket);
-        String ads = "https://d2xhxoq0r145gu.cloudfront.net/"+amazonBucket.split("/")[amazonBucket.split("/").length-1];
-        System.out.println("--------------------아래 Cloud Front-----------------------");
-        System.out.println(ads);
+        imageService.커버사진업로드(coverUploadDto);
+
         return "redirect:/"; // 여기 인테리어 페이지로 이동하게 할 것
     }
     //포트폴리오 사진
@@ -72,7 +68,7 @@ public class ImageController {
     }
 
     @PostMapping("/portfolio")
-    public String imageUpload(AlbumUploadDto albumUploadDto) {
+    public String imageUpload(AlbumUploadDto albumUploadDto) throws IOException {
         //서비스 호출
         Album albumEntity = albumUploadDto.toEntity(albumUploadDto.getCaption());
         List<Image> images = new ArrayList<>();

@@ -34,62 +34,53 @@ public class ImageService {
     private final AmazonS3 amazonS3;
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
-    @Value("${file.path}")
-    private String uploadFolder;
 
     @Transactional
-    public String 사진업로드(ImageUploadDto imageUploadDto, Album album) {
+    public String 사진업로드(ImageUploadDto imageUploadDto, Album album) throws IOException {
         UUID uuid = UUID.randomUUID();
         String imageFileName = uuid + "_" + imageUploadDto.getFile().getOriginalFilename();
-        System.out.println("이미지 파일이름:"+imageFileName);
+        System.out.println("이미지 파일이름:" + imageFileName);
 
-        Path imageFilePath = Paths.get(uploadFolder + imageFileName);
+        MultipartFile multipartFile = imageUploadDto.getFile();
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.setContentLength(multipartFile.getSize());
+        metadata.setContentType(multipartFile.getContentType());
+        amazonS3.putObject(bucket, imageFileName, multipartFile.getInputStream(), metadata);
 
-        try {
-            Files.write(imageFilePath, imageUploadDto.getFile().getBytes());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String amazonBucket = amazonS3.getUrl(bucket, imageFileName).toString();
+        String cloudFrontUrl = "https://dcjl2mwpjx5tl.cloudfront.net/" + amazonBucket.split("/")[amazonBucket.split("/").length - 1];
 
-        Image image = imageUploadDto.toEntity(imageFileName,album);
+        Image image = imageUploadDto.toEntity(cloudFrontUrl, album);
         imageRepository.save(image);
-        return imageFileName;
+        return cloudFrontUrl;
     }
+
     ///S3버킷 테스트용
     @Transactional
-    public String 커버사진업로드(CoverUploadDto coverUploadDto) throws IOException {
+    public void 커버사진업로드(CoverUploadDto coverUploadDto) throws IOException {
         UUID uuid = UUID.randomUUID();
         String imageFileName = uuid + "_" + coverUploadDto.getFile().getOriginalFilename();
-        System.out.println("커버 이미지 파일이름:"+imageFileName);
-
-        Path imageFilePath = Paths.get(uploadFolder + imageFileName);
-
-        try {
-            Files.write(imageFilePath, coverUploadDto.getFile().getBytes());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         MultipartFile multipartFile = coverUploadDto.getFile();
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentLength(multipartFile.getSize());
         metadata.setContentType(multipartFile.getContentType());
-
-
-        Cover cover = coverUploadDto.toEntity(imageFileName);
+        amazonS3.putObject(bucket, imageFileName, multipartFile.getInputStream(), metadata);
+        String amazonBucket = amazonS3.getUrl(bucket, imageFileName).toString();
+        String cloudFrontUrl = "https://dcjl2mwpjx5tl.cloudfront.net/" + amazonBucket.split("/")[amazonBucket.split("/").length - 1];
+        Cover cover = coverUploadDto.toEntity(cloudFrontUrl);
         coverRepository.save(cover);
 
-        amazonS3.putObject(bucket, imageFileName, multipartFile.getInputStream(), metadata);
-        return amazonS3.getUrl(bucket, imageFileName).toString();
+
     }
 
     @Transactional(readOnly = true)
-    public List<Image> 인테리어사진(){
+    public List<Image> 인테리어사진() {
         return imageRepository.mExplore();
     }
 
     @Transactional(readOnly = true)
-    public List<Cover> 커버사진(){
+    public List<Cover> 커버사진() {
         return coverRepository.mExplore();
     }
 
@@ -97,6 +88,7 @@ public class ImageService {
     public void 이미지삭제(int id) {
         imageRepository.deleteById(id);
     }
+
     @Transactional
     public void 커버이미지삭제(int id) {
         coverRepository.deleteById(id);
