@@ -44,10 +44,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set target IP
-        run: |
           # STATUS=$(curl -o /dev/null -w "%{http_code}" "https://${{ secrets.INTERIOR_URL }}")
           # echo $STATUS
+        run: |
           UPSTREAM=blue
+
+
           
       - name: Stop current server
         uses: appleboy/ssh-action@master
