@@ -45,7 +45,7 @@ jobs:
     steps:
       - name: Set target IP
         run: |
-          STATUS=$(curl -o /dev/null -w "%{http_code}" "https://${{ secrets.INTERIOR_URL }}/env")
+          STATUS=$(curl -o /dev/null -w "%{http_code}" "https://${{ secrets.INTERIOR_URL }}")
           echo $STATUS
           UPSTREAM=blue
           
