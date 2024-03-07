@@ -45,8 +45,8 @@ jobs:
     steps:
       - name: Set target IP
         run: |
-          STATUS=$(curl -o /dev/null -w "%{http_code}" "https://${{ secrets.INTERIOR_URL }}")
-          echo $STATUS
+          # STATUS=$(curl -o /dev/null -w "%{http_code}" "https://${{ secrets.INTERIOR_URL }}")
+          # echo $STATUS
           UPSTREAM=blue
           
       - name: Stop current server
