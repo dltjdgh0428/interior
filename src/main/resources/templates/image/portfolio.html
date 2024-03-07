@@ -19,7 +19,7 @@
             <div class="navbar-nav">
                 <a class="nav-link nav-item" href="/portfolio">시공사례</a>
                 <!-- 메인 이미지 추가/삭제 링크 -->
-                <button data-bs-toggle="modal" data-bs-target="#uploadModal" >이미지 추가하기
+                <button data-bs-toggle="modal" th:if="${principal != null}" data-bs-target="#uploadModal" >이미지 추가하기
                 </button>
             </div>
         </div>
@@ -50,7 +50,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="uploadModalLabel">이미지 업로드</h5>
+                <h5 class="modal-title" id="uploadModalLabel" >이미지 업로드</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
             </div>

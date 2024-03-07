@@ -14,20 +14,11 @@ server:
     encoding:
       charset: utf-8
       enabled: true
----
-
 --- ## blue
 spring:
   config:
     activate:
       on-profile: blue
-
-  security:
-    oauth2:
-      client:
-        registration:
-          kakao:
-            redirect-uri: "https://api.bookeverywhere.site/login/oauth2/code/kakao"
 
 server:
   port: 8080
@@ -43,12 +34,12 @@ server:
 
 spring:
   jpa:
-    open-in-view: true
-    hibernate:
-      ddl-auto: update
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
+    hibernate:
+      ddl-auto: create
+      properties:
+        hibernate:
+          format_sql: true
 
   servlet:
     multipart:
@@ -59,3 +50,9 @@ spring:
     import: application-secret.yml
 
 
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+    rg.hibernate.type: trace

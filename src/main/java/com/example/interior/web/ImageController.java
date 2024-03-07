@@ -36,6 +36,7 @@ public class ImageController {
         model.addAttribute("covers", imageService.커버사진());
         model.addAttribute("principal", principalDetails);
         model.addAttribute("comments",commentService.인사말());
+
         return "home";
     }
     @GetMapping("/portfolio")
