@@ -47,7 +47,7 @@ jobs:
           # STATUS=$(curl -o /dev/null -w "%{http_code}" "https://${{ secrets.INTERIOR_URL }}")
           # echo $STATUS
         run: |
-          UPSTREAM=blue
+          echo "UPSTREAM=blue" >> $GITHUB_ENV
 
 
           
