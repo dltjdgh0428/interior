@@ -1,10 +1,45 @@
+spring:
+  profiles:
+    active: local
+    group:
+      local: local, common, secret
+      blue: blue, common, secret
+
 server:
   port: 8080
+  env: blue
+
   servlet:
     context-path: /
     encoding:
       charset: utf-8
       enabled: true
+---
+
+--- ## blue
+spring:
+  config:
+    activate:
+      on-profile: blue
+
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            redirect-uri: "https://api.bookeverywhere.site/login/oauth2/code/kakao"
+
+server:
+  port: 8080
+  serverAddress: 13.124.166.1
+
+serverName: blue_server
+
+---
+server:
+  config:
+    activate:
+      on-profile: common
 
 spring:
   jpa:
@@ -22,3 +57,5 @@ spring:
 
   config:
     import: application-secret.yml
+
+
