@@ -57,7 +57,9 @@
     padding-left: 10px; /* 왼쪽 여백 추가 */
     /* 기존 스타일 유지 */
 }
-
+.caption-container .container-text {
+    white-space: pre-wrap; /* 공백과 줄바꿈을 유지하면서 텍스트를 래핑 */
+}
 
 .divider {
     margin-top: auto;
