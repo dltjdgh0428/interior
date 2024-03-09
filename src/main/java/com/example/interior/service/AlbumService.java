@@ -46,12 +46,11 @@ public class AlbumService {
     @Transactional
     public void 캡션수정(int albumId, String newCaption) {
 
-        Optional<Album> album = albumRepository.findById(albumId);
+        Album album = albumRepository.findById(albumId).orElseThrow();
 
-        if (album.isPresent()) {
-            Album existingAlbum = album.get();
-            existingAlbum.setCaption(newCaption);
-            albumRepository.save(existingAlbum);
+        if (album!=null) {
+            album.setCaption(newCaption);
+            albumRepository.save(album);
         } else {
 
             throw new EntityNotFoundException("Album with id " + albumId + " not found");
