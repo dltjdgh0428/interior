@@ -55,9 +55,14 @@
     flex: 1;
     border-left: 1px solid #ccc; /* 왼쪽에 2픽셀 두께의 회색 선 추가 */
     padding-left: 10px; /* 왼쪽 여백 추가 */
-    /* 기존 스타일 유지 */
+    max-height: 70vh; /* 최대 높이 설정, 화면 높이의 50%로 설정했으나 필요에 따라 조정 */
+    overflow-y: auto; /* 세로 스크롤바 설정 */
 }
+
 .caption-container .container-text {
+    font-size: 15px; /* 텍스트 크기를 24px에서 16px로 조정 */
+    color: #333; /* 텍스트 색상을 어둡게 설정합니다 */
+    padding: 10px; /* 텍스트 주변에 패딩을 추가합니다 */
     white-space: pre-wrap; /* 공백과 줄바꿈을 유지하면서 텍스트를 래핑 */
 }
 
@@ -131,12 +136,4 @@ button:hover {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-}
-
-.caption-container .container-text {
-    font-size: 24px; /* 원하는 크기로 설정 */
-    /* 추가적인 스타일링 */
-    color: #333; /* 텍스트 색상을 어둡게 설정합니다 */
-    padding: 10px; /* 텍스트 주변에 패딩을 추가합니다 */
-    /* 여기에 다른 스타일 속성들을 추가할 수 있습니다 */
 }

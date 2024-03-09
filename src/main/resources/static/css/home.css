@@ -12,6 +12,11 @@
     color: black !important;
 
 }
+.navbar-brand .navbar-logo {
+    width: 4em; /* 상위 요소 폰트 크기의 4배 */
+    height: auto; /* 높이 자동 조정 */
+}
+
 
 .nav-link.nav-item-admin {
     color: #004085;
