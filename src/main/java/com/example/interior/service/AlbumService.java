@@ -2,6 +2,7 @@ package com.example.interior.service;
 
 import com.example.interior.model.album.Album;
 import com.example.interior.model.album.AlbumRepository;
+import com.example.interior.model.image.ImageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,8 +16,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class AlbumService {
-    @PersistenceContext
-    private EntityManager entityManager;
+
+    private final ImageRepository imageRepository;
     private final AlbumRepository albumRepository;
 
     @Transactional(readOnly = true)
@@ -37,14 +38,9 @@ public class AlbumService {
     @Transactional
     public void 앨범삭제(int albumId) {
         // 앨범과 연관된 이미지를 먼저 삭제
-        entityManager.createNativeQuery("DELETE FROM Image WHERE album_id = :albumId")
-                .setParameter("albumId", albumId)
-                .executeUpdate();
-
-        // 이후 앨범 삭제
-        entityManager.createNativeQuery("DELETE FROM Album WHERE id = :albumId")
-                .setParameter("albumId", albumId)
-                .executeUpdate();
+        imageRepository.deleteByAlbumId(albumId);
+        // 그 다음 앨범 삭제
+        albumRepository.deleteById(albumId);
     }
 
     @Transactional

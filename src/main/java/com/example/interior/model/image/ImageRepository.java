@@ -8,4 +8,6 @@ import java.util.List;
 public interface ImageRepository extends JpaRepository<Image, Integer> {
     @Query(value = "select * from image", nativeQuery = true)
     List<Image> mExplore();
+
+    void deleteByAlbumId(int albumId);
 }
