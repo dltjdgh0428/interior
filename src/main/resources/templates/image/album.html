@@ -12,6 +12,7 @@
     <script src="/js/album.js"></script>
 </head>
 <body>
+
 <div id="overlay" class="overlay">
     <div class="overlay-content">
         <div class="content-wrapper">
@@ -21,7 +22,7 @@
                         <div th:each="image, iterStat : ${album.images}"
                              th:class="${iterStat.first} ? 'carousel-item active' : 'carousel-item'">
                             <img th:src="${image.postImageUrl}" class="d-block w-100"
-                                 th:alt="커버사진">
+                                 th:alt="앨범">
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#albumCarousel"

@@ -10,32 +10,45 @@
     align-items: center;
 }
 .overlay-content {
-    background-color: #fff; /* 배경색 설정 */
-    padding: 20px; /* 내부 여백 추가 */
+    background-color: #fff;
+    padding: 20px;
     display: flex;
-   /* flex-direction: row;
-    align-items: center; */
-    flex-direction: column; /* 세로 방향으로 요소 배치 */
+    flex-direction: column;
     align-items: stretch;
     justify-content: center;
-    width: 70%; /* 고정 가로 크기 */
-    height: 80%; /* 고정 세로 크기 */
-    overflow: auto; /* 내용이 넘칠 경우 스크롤바 표시 */
-    border-radius: 15px; /* 테두리 둥글게 설정 */
-    border: none; /* 테두리 제거 */
-
-    position: relative; /* 자식 요소에 대한 상대적 위치 지정 */
+    width: 70%;
+    height: auto; /* 높이를 자동으로 조정 */
+    max-height: 90vh; /* 최대 높이 설정 */
+    overflow: auto;
+    border-radius: 15px;
+    position: relative;
 }
+
+.image-container {
+    display: flex; /* 이미지를 가운데 정렬하기 위해 flex를 사용 */
+    justify-content: center; /* 중앙 정렬 */
+    align-items: center; /* 가운데 정렬 */
+    max-width: 100%; /* 컨테이너의 최대 너비 제한 */
+    max-height: 70vh; /* 뷰포트 높이의 일정 비율로 최대 높이 설정 */
+    overflow: hidden; /* 컨테이너를 넘어서는 부분 숨김 */
+}
+
+.carousel-item img {
+    object-fit: contain; /* 비율 유지하면서 컨테이너 내에 맞춤 */
+    max-height: 70vh; /* 이미지의 최대 높이를 컨테이너의 높이에 맞춤 */
+    width: auto; /* 너비 자동 조정으로 가로 공백 허용 */
+    height: auto; /* 높이 자동 조정 */
+    margin: auto; /* 이미지를 컨테이너 중앙에 위치 */
+}
+
+
+
 .content-divider {
     width: 100%; /* 전체 너비 */
     border-top: 1px solid #fff; /* 상단 구분선 */
     background-color: rgba(0,0,0,0.1); /* 반투명 배경 */
     position: absolute;
     bottom: 45px; /* 버튼 바로 위에 위치 */
-}
-.image-container {
-    flex: 3;
-    padding-right: 10px;
 }
 
 .caption-container {
@@ -61,15 +74,7 @@
 
 .container-text {
     /* 텍스트 스타일링 */
-    padding: 20px;
-}
-
-.carousel-item img {
-    height: 100%;
-}
-
-.carousel-item img {
-    height: 100%;
+    padding: 15px;
 }
 
 .content-wrapper {
