@@ -16,12 +16,16 @@
 - 관리자 로그인
 - 커버 사진 업로드
 - 캐러샐, 모달
-- 이미지 앨범 업로드
+- 이미지 앨범 업로드 , 삭제
+- 커버 코멘트 삭제, 추가
+- 이미지 앨범 content 수정, 삭제
 
 ## 클라우드 아키텍처
 ![DesignAllim클라우드아키텍처](https://github.com/dltjdgh0428/interior/assets/33485494/2984526b-a9ea-41f6-ad3a-c685a16f7710)
 
 ## ERD
+![Design_Allim_ERD](https://github.com/dltjdgh0428/interior/assets/33485494/dce0087c-c793-40e6-b854-1506cd9845e3)
+
 
 ## 커밋 컨벤션
 
